@@ -1,0 +1,101 @@
+*{font-family: 'Fira Sans';}
+body {
+    margin: 0 auto;
+    font-family: serif;
+    background-color: white;
+}
+
+#cuerpo {
+    width: 1600px;
+    margin: 0 auto;
+}
+
+.cnodo{
+        opacity: 1;
+}
+
+/*
+.nodo:hover{
+        fill: red;
+}
+*/
+    
+/*
+.id-nodo{
+        opacity: 0.7;
+        fill: #de1616;
+    font-size: 0.9em;
+font-style: normal;
+    font-weight: bolder
+    }
+
+.id-nodo .invisible{
+        visibility: hidden;
+    }
+*/
+
+
+/*
+.id_nodo:hover{
+        opacity: 1;
+        fill: black;
+    font-size: 0.5em;
+        
+
+    }
+*/
+
+
+ .enlace{
+        stroke:lightgrey;
+/*        stroke-width: 0.5pt;*/
+        
+    }
+#variables-control {
+    width: 960px;
+}
+
+#variables-control input[type="text"] {
+width: 40px;
+}
+
+#grafico {
+min-width: 600px;    
+width: 100%
+}
+
+
+#explicacion{
+width: 760px;
+margin: 0 auto;
+}
+
+
+#reheat {
+    width: 120px;
+    margin: 0 auto;
+}
+
+
+
+#jscode {
+    width: 760px;
+    margin: 0 auto;
+}
+
+input {
+    width: 150px;
+}
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+/*    width: 200px;					*/
+/*    height: 14px;					*/
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: lightsteelblue;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+}

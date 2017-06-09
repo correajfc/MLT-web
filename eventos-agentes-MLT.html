@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+<meta charset="utf-8">
+<title>MLT60</title>
+<!--Cargar Librerias javascript    -->
+<script src="js/libs/d3.js"></script>
+<script src="js/libs/jquery-1.12.2.js"></script> 
+<script src="js/libs/prism.js"></script>
+<link href="css/TES.css" rel="stylesheet"> 
+<link href="css/prism.css" rel="stylesheet">    
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Fira Sans']
+    }
+  });
+</script>  
+</head>
+
+    
+<!--Cuerpo    -->
+<body>
+<div id="cuerpo" >
+<h1>60 años de exhibiciones</h1>
+    <h2>Museo la Tertulia, 1956-2016 </h2>
+    
+<section id="dataviz">
+<div id="variables-control">
+<!--
+<div id="sliders">
+<label for="gravedad">Gravedad:&nbsp;</label>
+<input id="gravity" class="slider" name="gravedad" type="range" min="0" max="2" step="0.01" value="0.9">&nbsp;<input class="textinput" type="text" id="textgravity" value="0.9">    
+
+<label for="carga">Carga:&nbsp;</label>
+<input id="charge" name="carga" type="range" min="0" max="10" step="0.05" value="1">&nbsp;<input type="text" id="textcharge" value="1" class="textinput">
+    
+<label for="friccion">Fricción:&nbsp;</label>
+<input id="friction" name="friccion" type="range" min="0" max="1" step="0.01" value="0.8">&nbsp;<input type="text" id="textfriction" value="0.7" class="textinput"><br>
+</div>
+-->
+<input id="reheat" type="reset" value="Recalentar modelo" onclick="control_recalentar()">    
+</div>   
+<div id="grafico" ></div>
+</section>
+<section id="explicacion">
+    
+    <p>El tamaño de los nodos es proporcional al número de conexiones del nodo. La longitud de un enlace entre un par de nodos es proporcional al cociente entre el número de enlaces del nodo de mayor cantidad de enlaces y el de menor cantidad.La carga toma valores negativos, de repulsión, proporcionalmente al tamaño del nodo.</p>
+    <p> Se dispone de dos controles para modificar los parámetros de gravedad, carga y fricción. La gravedad va entre 0 y 2 con un valor inicial de 0.9; el control de carga es un factor positvo de multiplicador de la funcion de carga construida que va entre 1 y 10, con un valor inicial de 1;la fricción de 1 representa no-fricción a 0 congela las partículas del layout de fuerza, y tiene un valor inicial de 0.9. El botón recalentar modelo reinicia la simulación modificando el parámetro de enfriamiento alpha. </p>
+</section>    
+<section id="jscode">
+<pre><code id="codigo" class="language-javascript" >
+
+En construcción.    
+
+</code></pre>    
+</section>    
+
+</div>    
+</body>  
+<!--Pie-->
+<footer>
+    
+</footer> 
+
+<script src="js/eventos-agentes-MLT.js">
+</script>  
+<!--
+<script> 
+    $(function(){
+      $("#codigo").load("js/usa-la-fuerza.js"); 
+    });
+</script>     
+-->
+</html>
