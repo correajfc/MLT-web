@@ -105,14 +105,6 @@ fuerza=d3.layout.force()
         ;    
     
     
-
-//escuchar cambios en el control de gravedad
-
-//escuchar cambios en el control de carga
-   
-//actualizarcarga(in_carga);
-      
-//escuchar cambios en el control de carga
         
 cargardatos(dir_archivo);
 
@@ -120,131 +112,6 @@ cargardatos(dir_archivo);
     
 
 //funciones
-//funciones de visualización de eventos de usuario
-//zoom+pan
-function zum() {
-  svgg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-//  svg.attr("transform", "translate(" + d3.event.translate + ")");    
-}
-function szum() {
-    console.log("zoom", d3.event.translate, d3.event.scale);
-    scaleFactor = d3.event.scale;
-    translation = d3.event.translate;
-    tick(); //update positions
-}
-
-
-function dragstarted(d){ 
-    d3.event.sourceEvent.stopPropagation();
-    d3.select(this).classed("dragging", true);
-    fuerza.stop(); //stop ticks while dragging
-}
-function dragged(d){
-    if (d.fixed) return; //root is fixed
-    
-    //get mouse coordinates relative to the visualization
-    //coordinate system:
-    var mouse = d3.mouse(svgg.node());
-    d.x = (mouse[0] - translation[0])/scaleFactor; 
-    d.y = (mouse[1] - translation[1])/scaleFactor; 
-            focus_node = d;
-            set_focus(d)
-            if (highlight_node === null) 
-                set_highlight(d)
-
-    tick();//re-position this node and any links
-}
-function dragended(d){
-    d3.select(this).classed("dragging", false);
-    fuerza.resume();
-}
-
-//on mouseover
-function set_highlight(d)
-{
-	
-	if (focus_node!==null) d = focus_node;
-	highlight_node = d;
-
-	if (highlight_color!="none")
-	{
-		  circle.style("stroke", function(o) {
-                return isConnected(d, o) ? highlight_color : "none";});
-          
-//			text.style("font-weight", function(o) {
-//                return isConnected(d, o) ? "bold" : "normal";});
-        circle.style("stroke-width","2px")
-            visenlaces.style("stroke", function(o) {
-		      return o.source.index == d.index || o.target.index == d.index ? highlight_color :default_link_color;
-                 
-
-            });
-        visenlaces.style("stroke-width",function(o) {
-		      return o.source.index == d.index || o.target.index == d.index ? "2px" :"1px";
-                 
-
-            });
-	}
-}
-
-function exit_highlight()
-{
-		highlight_node = null;
-	if (focus_node===null)
-	{
-		svg.style("cursor","move");
-		if (highlight_color!="none")
-	{
-  	  circle.style("stroke", "none");
-//	  text.style("font-weight", "normal");
-	  visenlaces.style("stroke", default_link_color);
-      visenlaces.style("stroke-width","1px");     
-      nlabel.style("visibility","hidden") ;   
- }
-			
-	}
-}
-
-function set_focus(d)
-{	
-if (highlight_trans<1)  {
-    circle.transition()		
-                .duration(200)
-    .style("opacity", function(o) {
-                return isConnected(d, o) ? 1 : highlight_trans;
-            });
-    
-    nlabel.style("visibility", function(o) {
-                return isConnectedElse(d, o)? "visible" : "hidden";
-            });
-
-//			text.style("opacity", function(o) {
-//                return isConnected(d, o) ? 1 : highlight_trans;
-//            });
-			
-            visenlaces.style("opacity", function(o) {
-                return o.source.index == d.index || o.target.index == d.index ? 1 : highlight_trans;
-            });		
-	}
-}
-
-//funciones de matriz de conectividad
-function isConnected(a, b) {
-        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
-    }
-
-function hasConnections(a) {
-		for (var property in linkedByIndex) {
-				s = property.split(",");
-				if ((s[0] == a.index || s[1] == a.index) && linkedByIndex[property]) 					return true;
-		}
-	return false;
-	}
-
-function isConnectedElse(a, b) {
-        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] && a.index != b.index;
-    }
-
 	
 //inicialización del force layout  
 function iniciarfuerza(){
@@ -484,6 +351,133 @@ d3.selectAll(".texto-nodo").attr("x", function (d) {
     });     
     
 }
+
+//funciones de visualización de eventos de usuario
+//zoom+pan
+function zum() {
+  svgg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+//  svg.attr("transform", "translate(" + d3.event.translate + ")");    
+}
+function szum() {
+    console.log("zoom", d3.event.translate, d3.event.scale);
+    scaleFactor = d3.event.scale;
+    translation = d3.event.translate;
+    tick(); //update positions
+}
+
+
+function dragstarted(d){ 
+    d3.event.sourceEvent.stopPropagation();
+    d3.select(this).classed("dragging", true);
+    fuerza.stop(); //stop ticks while dragging
+}
+function dragged(d){
+    if (d.fixed) return; //root is fixed
+    
+    //get mouse coordinates relative to the visualization
+    //coordinate system:
+    var mouse = d3.mouse(svgg.node());
+    d.x = (mouse[0] - translation[0])/scaleFactor; 
+    d.y = (mouse[1] - translation[1])/scaleFactor; 
+            focus_node = d;
+            set_focus(d)
+            if (highlight_node === null) 
+                set_highlight(d)
+
+    tick();//re-position this node and any links
+}
+function dragended(d){
+    d3.select(this).classed("dragging", false);
+    fuerza.resume();
+}
+
+//on mouseover
+function set_highlight(d)
+{
+	
+	if (focus_node!==null) d = focus_node;
+	highlight_node = d;
+
+	if (highlight_color!="none")
+	{
+		  circle.style("stroke", function(o) {
+                return isConnected(d, o) ? highlight_color : "none";});
+          
+//			text.style("font-weight", function(o) {
+//                return isConnected(d, o) ? "bold" : "normal";});
+        circle.style("stroke-width","2px")
+            visenlaces.style("stroke", function(o) {
+		      return o.source.index == d.index || o.target.index == d.index ? highlight_color :default_link_color;
+                 
+
+            });
+        visenlaces.style("stroke-width",function(o) {
+		      return o.source.index == d.index || o.target.index == d.index ? "2px" :"1px";
+                 
+
+            });
+	}
+}
+
+function exit_highlight()
+{
+		highlight_node = null;
+	if (focus_node===null)
+	{
+		svg.style("cursor","move");
+		if (highlight_color!="none")
+	{
+  	  circle.style("stroke", "none");
+//	  text.style("font-weight", "normal");
+	  visenlaces.style("stroke", default_link_color);
+      visenlaces.style("stroke-width","1px");     
+      nlabel.style("visibility","hidden") ;   
+ }
+			
+	}
+}
+
+function set_focus(d)
+{	
+if (highlight_trans<1)  {
+    circle.transition()		
+                .duration(200)
+    .style("opacity", function(o) {
+                return isConnected(d, o) ? 1 : highlight_trans;
+            });
+    
+    nlabel.style("visibility", function(o) {
+                return isConnectedElse(d, o)? "visible" : "hidden";
+            });
+
+//			text.style("opacity", function(o) {
+//                return isConnected(d, o) ? 1 : highlight_trans;
+//            });
+			
+            visenlaces.style("opacity", function(o) {
+                return o.source.index == d.index || o.target.index == d.index ? 1 : highlight_trans;
+            });		
+	}
+}
+
+//funciones de matriz de conectividad
+function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+    }
+
+function hasConnections(a) {
+		for (var property in linkedByIndex) {
+				s = property.split(",");
+				if ((s[0] == a.index || s[1] == a.index) && linkedByIndex[property]) 					return true;
+		}
+	return false;
+	}
+
+function isConnectedElse(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] && a.index != b.index;
+    }
+
+
 //funciones actualizar valor controles  
 function actualizargravedad(sgravedad){
     fuerza.gravity(sgravedad);

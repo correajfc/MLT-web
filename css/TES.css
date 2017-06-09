@@ -1,4 +1,4 @@
-*{font-family: 'Fira Sans';}
+* {font-family: 'Fira Sans';}
 body {
     margin: 0 auto;
     font-family: serif;
@@ -8,6 +8,7 @@ body {
 #cuerpo {
     width: 1600px;
     margin: 0 auto;
+    background-color: white;
 }
 
 .cnodo{
@@ -44,9 +45,21 @@ font-style: normal;
 
     }
 */
+svg {
+    
+/*border-style: solid;*/
+border-color: #e51b1b;
+border-width: thin
+    
+}
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
 
 
- .enlace{
+
+.enlace{
         stroke:lightgrey;
 /*        stroke-width: 0.5pt;*/
         
@@ -62,6 +75,7 @@ width: 40px;
 #grafico {
 min-width: 600px;    
 width: 100%
+background-color: white;
 }
 
 
@@ -80,7 +94,7 @@ margin: 0 auto;
 
 #jscode {
     width: 760px;
-    margin: 0 auto;
+    margin-bottom: 10px;
 }
 
 input {
